@@ -22,6 +22,16 @@ export default {
      // return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/" + this.pokemonId + ".svg";
       return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.pokemonId}.svg`; // AQUI VA CODIGO JAVASCRIPT 
     }
+  },
+  methods: {
+    metodoPrueba() {
+      console.log('se ejecuto el metodo prueba desde el padre');
+    }
+  },
+  data() {
+    return {
+      propiedadPrueba: 'este texto es prueba'
+    }
   }
 
 }
