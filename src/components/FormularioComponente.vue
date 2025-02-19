@@ -21,14 +21,18 @@
       </div>
       <div class="button-center">
         <button v-on:click="buscar()">Consultar</button>
-        <button v-on:click="guardar()">Consultar</button>
+        <button v-on:click="guardar()">Guardar</button>
+        <button v-on:click="actualizar()">Actualizar</button>
+        <button v-on:click="actualizarParcial()">Actualizar Parcial</button>
+        <button v-on:click="eliminar()">Eliminar</button>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { obtenerPorIdFachada, insertarFachada } from '@/client/PersonaCliente';
+import { obtenerPorIdFachada, insertarFachada, actualizarFachada, actualizarParcialFachada, eliminarFachada } from '@/client/PersonaCliente';
 export default {
   mounted() {
     console.log("Antes de llamar al API")
@@ -57,14 +61,36 @@ export default {
       this.datos.fecha = data.fecha
     },
     async guardar() {
-      const bodyPersona={
+      const bodyPersona = {
         nombre: this.datos.nombre,
         apellido: this.datos.apellido,
         fecha: this.datos.fecha
       }
       await insertarFachada(bodyPersona)
+    },
+    async actualizar() {
+      const bodyPersona = {
+        nombre: this.datos.nombre,
+        apellido: this.datos.apellido,
+        //fecha: this.datos.fecha
+      }
+      await actualizarFachada(this.datos.id, bodyPersona)
+    },
+    
+    async actualizarParcial() {
+      console.log("ActualizarParcial");
+      const bodyPersona = {
+        nombre: this.datos.nombre,
+        apellido: this.datos.apellido,
+        //fechaNacimiento: this.datos.fechaNacimiento,
+      };
+      await actualizarParcialFachada(this.datos.id, bodyPersona);
+    },
+    async eliminar() {
+      await eliminarFachada(this.datos.id)
     }
-}
+
+  }
 };
 </script>
 
